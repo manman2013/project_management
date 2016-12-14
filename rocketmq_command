@@ -1,0 +1,18 @@
+关闭命令
+./mqshutdown namesrv/broker
+
+touch /var/lock/subsys/local
+cd /wdcloud/app/rocketmq/bin
+nohup sh ./mqnamesrv  &
+cd /wdcloud/app/rocketmq/bin
+sudo nohup sh ./mqbroker -c ../conf/2m-2s-async/broker-a-s.properties  &
+
+cd /wdcloud/app/rocketmq/bin
+nohup sh ./mqnamesrv  &
+cd /wdcloud/app/rocketmq/bin
+sudo nohup sh ./mqbroker -c ../conf/2m-2s-async/broker-a-s.properties  &
+
+sudo nohup sh ./mqnamesrv > /wdcloud/log/rocketmqlog/namesrv.log  &
+sudo nohup sh ./mqbroker -n 172.16.30.114:9876 -c /wdcloud/app/rocketmq/conf/2m-2s-async/broker-a-s.properties >/wdcloud/log/rocketmqlog/broker.log  &
+
+sudo nohup sh ./mqbroker -n 172.16.30.114:9876 -c /wdcloud/app/alibaba-rocketmq/conf/2m-2s-async/broker-a.properties >/wdcloud/log/rocketmqlog/broker.log  &
